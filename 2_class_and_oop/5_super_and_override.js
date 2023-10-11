@@ -19,6 +19,10 @@ class FemaleIdolModel extends IdolModel {
     super(name, year);
     this.part = part;
   }
+  sayHello() {
+    // return `안녕하세요 ${this.name}입니다. ${this.part}를 맡고 있습니다.`;
+    return `${super.sayHello()} ${this.part}을 맡고 있습니다.`;
+  }
 }
 
 const yuJin = new FemaleIdolModel("안유진", 2003, "vocal");
