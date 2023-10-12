@@ -8,8 +8,6 @@ const yuJin = {
   year: 2003,
 };
 
-console.log(Object.getOwnPropertyDescriptor(yuJin, "year"));
-
 /*
 1) value = 실제 프로퍼티의 값
 2) writable = 값을 수정 할 수 있는지의 여부. false로 설정하면 프로퍼티 값 변경 불가능.
@@ -29,8 +27,74 @@ const yuJin2 = {
     return new Date().getFullYear() - this.year;
   },
   set age(age) {
-    this.year = new Date().getFullYear() = age;
-  }
+    this.year = new Date().getFullYear() - age;
+  },
 };
 
-console.log(yuJin2)
+console.log(yuJin2);
+console.log(yuJin2.age); // getter 사용
+
+console.log("------------");
+
+console.log(yuJin2);
+yuJin2.age = 32;
+console.log(yuJin2.age);
+console.log(yuJin2.year);
+console.log(yuJin2);
+
+// 2023. 10. 12 오전 12 : 09 "3section 2_property_attribute"
+// 프로퍼티 어트리뷰트 7분 51초
+
+console.log(Object.getOwnPropertyDescriptor(yuJin2, "age"));
+
+Object.defineProperty(yuJin2, "height", {
+  value: 172,
+  writable: true,
+  enumerable: true,
+  configurable: true,
+});
+console.log(yuJin2);
+console.log(Object.getOwnPropertyDescriptor(yuJin2, "height"));
+
+// writable
+
+yuJin2.height = 180;
+console.log(yuJin2);
+Object.defineProperty(yuJin2, "height", {
+  writable: false,
+});
+console.log(Object.getOwnPropertyDescriptor(yuJin2, "height"));
+console.log("--------------------");
+yuJin2.height = 172;
+console.log(yuJin2);
+
+// enumerable
+
+console.log(Object.keys(yuJin2));
+for (let key in yuJin2) {
+  console.log(key);
+}
+Object.defineProperty(yuJin2, "name", {
+  enumerable: false,
+});
+
+console.log(Object.getOwnPropertyDescriptor(yuJin2, "name"));
+
+console.log("---------------");
+console.log(Object.keys(yuJin2));
+for (let key in yuJin2) {
+  console.log(key);
+}
+console.log(yuJin2);
+console.log(yuJin2.name);
+
+// configurable
+
+Object.defineProperties(yuJin2, "height", {
+  configurable: false,
+});
+console.log(Object.getOwnPropertyDescriptor(yuJin2, "height"));
+
+Object.defineProperty(yuJin2, "height", {
+  enumerable: false,
+});
